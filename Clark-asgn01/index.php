@@ -9,10 +9,9 @@ class Bird {
   function birdSong() {
     return 'drink-your-tea!';
   }
-
 }
 
-
+$bird1 = new Bird;
 
 
 
