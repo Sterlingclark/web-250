@@ -1,25 +1,30 @@
 <?php
 
 class Dog {
-  var $type;
-  var $weight;
-  var $height;
-  var $origin;
-  var $color;
-  var $has_tail = true;
+  public $type;
+  public $weight;
+  public $height;
+  public $origin;
+  public $color;
+  protected $has_tail = true;
 
   function get_values() {
-    return $this->type . "<br />" . $this->weight . "<br />" . $this->height . "<br /> " . $this->origin . "<br />" . $this->color . "<br /> " . $this->has_tail . " <br />";
+    return $this->type . "<br />" . $this->weight . "<br />" . $this->height . "<br /> " . $this->origin . "<br />" . $this->color . "<br /> ";
   } 
+
+  public function tail_details() {
+    $tail_string =  $this->has_tail == 1 ? "Does have a tail" : "{$this->has_tail} Does not have a tail" ;
+    return $tail_string;
+  }
 }
 
 
 class GreatDane extends Dog {
-  var $has_tail = true;
+  protected $has_tail = true;
 } 
 
 class Corgi extends Dog {
-  var $has_tail = false;
+  protected $has_tail = false;
 }
 
 
@@ -38,10 +43,11 @@ $corgi->origin = "Pembrokeshire";
 $corgi->color = "Tan";
 
 echo "Dog Type: " . "<br />";
-echo $greatDane->get_values() . "<br />";
-echo $corgi->get_values() . "<br />";
-
-
+echo $greatDane->get_values();
+echo $greatDane->tail_details() . "<br />";
+echo "<hr/ >";
+echo $corgi->get_values();
+echo $corgi->tail_details() . "<br />";
 
 
 
