@@ -13,16 +13,20 @@
   <?php
   include 'Bird.php';
 
-  $bird = Bird::create();
-  echo '<p>The generic song of any bird is "' . $bird::$song . '".</p>';
+  $bird = new Bird;
+  $fly_catcher = new YellowBelliedFlyCatcher;
+  $kiwi = new Kiwi;
+  echo '<p>The generic bird count is "' . $bird::$instatnce_count . '".</p>';
+  echo '<p>The fly catcher count is  "' . $fly_catcher::$instatnce_count . '".</p>';
+  echo '<p>The Kiwi count is  "' . $kiwi::$instatnce_count . '".</p>';
 
-  $fly_catcher = YellowBelliedFlyCatcher::create();
-  echo '<p>The song of the ' . $fly_catcher::$name . ' on breeding grounds is "' . $fly_catcher::$song . '".</p>';
+  $genericBird = Bird::create();
+  $yellowFlyCatcher = YellowBelliedFlyCatcher::create();
+  $kiwiBird = Kiwi::create();
+  echo '<p>The generic bird count after using the create method is "' . $genericBird::$instatnce_count . '".</p>';
+  echo '<p>The fly catcher count after using the create method is  "' . $yellowFlyCatcher::$instatnce_count . '".</p>';
+  echo '<p>The Kiwi count after using the create method is  "' . $kiwiBird::$instatnce_count . '".</p>';
 
-  $kiwi = Kiwi::create();
-  Kiwi::$flying = "no";
-  echo "<p>The " . $fly_catcher::$name . " " . $fly_catcher::can_fly() . ".</p>";
-  echo "<p>The " . $kiwi::$name . " " . $kiwi::can_fly() . ".</p>";
 
   ?>
 </body>

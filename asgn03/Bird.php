@@ -5,7 +5,7 @@ class Bird {
   public static $food;
   public static $nesting = "tree";
   public static $conservation;
-  public static $instatnce_count;
+  public static $instatnce_count = 0;
   public static $egg_num = "0";
   public static $song = "chirp";
   private static $flying = "yes";
@@ -14,13 +14,14 @@ class Bird {
   // I couldn't get the Null Coalescing Operator to work so I used 
   // A Ternary Operator instead
   public static function can_fly() {
-    $flying_string = (static::$flying) ? "can fly" : "is stuck on the ground"; 
+    $flying_string = (static::$flying == 'yes') ? "can fly" : "is stuck on the ground"; 
     return $flying_string;
   }
 
   public static function create() {
     $class_name = get_called_class();
-    $obj = new $class_name;
+    $obj = new static;
+    self::$instatnce_count++;
     return $obj;
   }
 }
