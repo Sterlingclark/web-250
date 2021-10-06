@@ -3,11 +3,14 @@
 include 'connect.php';
 
 $stmt = $db->query("SELECT * FROM names");
-$results = $stmt->fetchAll();
+$results = $stmt->fetchAll(PDO::FETCH_NUM);
 
-while ($row = $stmt->fetch()) {
-  echo "<pre>" . var_dump($row) . "</pre>";
+foreach($results as $row) {
+  $firstname = htmlentities($row['1']);
+  $lastname = htmlentities($row['2']);
+  $postcode = htmlentities($row['3']);
 
+  echo $firstname . " " .  $lastname . " " . $postcode . "<br>";
 }
 
 
