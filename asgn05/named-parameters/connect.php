@@ -1,7 +1,7 @@
 <?php
 
 try{
-  $db = new PDO('mysql:host=localhost;dbname=birdsdb;charset=utf8', 'root', '');
+  $db = new PDO('mysql:host=localhost;dbname=birdsQueries;charset=utf8', 'utmqempsv8gnr', 'secretpassword!');
   // var_dump($db);
 } catch(Exception $e) {
   // echo $e->getMessage();

@@ -1,5 +1,4 @@
-CREATE DATABASE IF NOT EXISTS `birdsdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `birdsdb`;
+DROP TABLE IF EXISTS birds;
 
 CREATE TABLE `birds` (
   `id` int(11) NOT NULL,
