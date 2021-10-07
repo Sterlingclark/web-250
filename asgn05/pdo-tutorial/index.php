@@ -1,7 +1,7 @@
 <?php
 
 
-echo '<h1>Links for other assignments</h1><br>';
+echo '<h1>Links for Queries</h1><br>';
 echo '<a href="fetch.php">Fetch</a><br>';
 echo '<a href="fetchAll.php">Fetch All</a><br>';
 echo '<a href="prepared-statement.php">Prepared Statements</a><br>';
