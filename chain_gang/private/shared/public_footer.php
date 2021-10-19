@@ -22,5 +22,5 @@
 
 <?php 
 db_disconnect($database);
-  $database->close();
+  // $database->close();
 ?>

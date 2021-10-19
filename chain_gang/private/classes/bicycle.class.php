@@ -1,7 +1,60 @@
 <?php
 
 class Bicycle {
+//----------- Start of active record code ---------------//
 
+  static protected $database;
+
+  static public function set_database($database) {
+    self::$database = $database;
+  }
+
+  static public function find_by_sql($sql) {
+    $result = self::$database->query($sql);
+    if(!$result) {
+      exit("Database Query Failed.");
+    }
+
+    // convert results into objects
+    $object_array = [];
+    while($record = $result->fetch_assoc()) {
+      $object_array[] = self::instantiate($record);
+    }
+    $result->free();
+
+    return $object_array;
+  }
+
+  static public function find_all() {
+    $sql = "SELECT * FROM bicycles";
+    return self::find_by_sql($sql);
+  }
+
+  static public function find_by_id($id) {
+    $sql = "SELECT * FROM bicycles ";
+    $sql .= "WHERE id='" . self::$database->escape_string($id) . "'";
+    $obj_array = self::find_by_sql($sql);
+    if(!empty($obj_array)) {
+      return array_shift($obj_array);
+    } else {
+      return false;
+    }
+  }
+
+  static protected function instantiate($record) {
+    $object = new self;
+    // Could manually assign values to properties
+    // but automatically assigning values works better
+    foreach($record as $property => $value) {
+      if(property_exists($object, $property)) {
+        $object->$property = $value;
+      } // end if 
+    } // end for each 
+    return $object;
+  }
+  //----------- End of active record code ---------------//
+
+  public $id;
   public $brand;
   public $model;
   public $year;
@@ -27,6 +80,7 @@ class Bicycle {
 
   public function __construct($args=[]) {
     //$this->brand = isset($args['brand']) ? $args['brand'] : '';
+    $this->id = $args['id'] ?? '';
     $this->brand = $args['brand'] ?? '';
     $this->model = $args['model'] ?? '';
     $this->year = $args['year'] ?? '';
@@ -44,6 +98,10 @@ class Bicycle {
     //     $this->$k = $v;
     //   }
     // }
+  }
+
+  public function name() {
+    return "{$this->brand} {$this->model} {$this->year}";
   }
 
   public function weight_kg() {
