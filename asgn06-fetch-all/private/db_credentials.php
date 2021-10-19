@@ -1,6 +1,6 @@
 <?php
 
 define("DB_SERVER", "localhost");
-define("DB_USER", "sterlingdclark");
-define("DB_PASS", "3adDM5k48puKi4GQ");
-define("DB_NAME", "birdsdb");
+define("DB_USER", "uav7ers3td1dz");
+define("DB_PASS", "SidneyStileye!");
+define("DB_NAME", "dbgzaybni3mk2q");
