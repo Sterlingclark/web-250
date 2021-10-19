@@ -56,6 +56,7 @@ $bike_array = $parser->parse();
   $result->free();
 
   echo "Brand: " . $row['brand'];
+
 ?>
   </div>
 
