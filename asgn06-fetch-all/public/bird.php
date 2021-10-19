@@ -34,7 +34,7 @@ $bird_array = $parser->parse();
 
 
       <?php foreach($bird_array as $args) { ?>
-     <?php  $bird = new Bird($args);   ?>
+      <?php  $bird = new Bird($args);   ?>
       <tr>
         <td><?php echo $bird->common_name; ?></td>
         <td><?= $bird->habitat; ?></td>

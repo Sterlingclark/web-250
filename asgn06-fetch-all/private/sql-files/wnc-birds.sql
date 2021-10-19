@@ -4,7 +4,7 @@ CREATE TABLE `birds` (
   `common_name` varchar(100) NOT NULL,
   `habitat` varchar(100) NOT NULL,
   `food` varchar(100) NOT NULL,
-  `conservation_idHH` tinyint NOT NULL,
+  `conservation_id` tinyint NOT NULL,
   `backyard_tips` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
