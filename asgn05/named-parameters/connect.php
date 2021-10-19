@@ -5,7 +5,7 @@ try{
   // var_dump($db);
 } catch(Exception $e) {
   echo $e->getMessage();
-  // echo "An error has occured";
+  echo "An error has occured";
 }
 
 
