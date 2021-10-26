@@ -3,7 +3,9 @@
 class Bicycle {
 //----------- Start of active record code ---------------//
 
-  static protected $database;
+  static protected $database; 
+
+  static protected $db_collumns =['id', 'brand', 'model', 'year', 'category', 'color', 'gender', 'price', 'weight_kg', 'condition_id', 'description'];
 
   static public function set_database($database) {
     self::$database = $database;
@@ -52,6 +54,70 @@ class Bicycle {
     } // end for each 
     return $object;
   }
+
+  protected function create() {
+    $attributes = $this->sanitized_attributes();
+    $sql = "INSERT INTO bicycles (";
+    $sql .= join(', ', array_keys($attributes));
+    $sql .= ") VALUES ('";
+    $sql .= join("', '", array_values($attributes));
+    $sql .= "')";
+    $result = self::$database->query($sql);
+    if($result) {
+      $this->id = self::$database->insert_id;
+    }
+    return $result;
+  } 
+
+  protected function update() {
+    $attributes = $this->sanitized_attributes();
+    $attribute_pairs = [];
+    foreach($attributes as $key => $value) {
+      $attribute_pairs[] = "{$key}='{$value}'";
+    }
+
+    $sql = "UPDATE bicycles SET ";
+    $sql .=  join(', ', $attribute_pairs);
+    $sql .= " WHERE id='" . self::$database->escape_string($this->id) . "'";
+    $sql .= "LIMIT 1";
+    $result = self::$database->query($sql);
+    return $result;
+  }
+
+  public function save() {
+    // a new record will not have an ID yet
+    if(isset($id)) {
+      return $this->update();
+    } else {
+      return $this->create();
+    }
+  }
+
+  public function merge_attributes($args=[]) {
+    foreach($args as $key => $value) {
+      if(property_exists($this, $key) && !is_null($value)) {
+        $this->$key = $value;
+      }
+    }
+  }
+
+  // Properties which have database columsn exluding id
+  public function attributes() {
+    $attributes = [];
+    foreach(self::$db_collumns as $column) {
+      if($column == 'id') { continue; }
+      $attributes[$column] = $this->$column;
+    }
+    return $attributes;
+  }
+
+  protected function sanitized_attributes() {
+    $sanitized = [];
+    foreach($this->attributes() as $key => $value) {
+      $sanitized[$key] = self::$database->escape_string($value);
+    }
+    return $sanitized;
+  }
   //----------- End of active record code ---------------//
 
   public $id;
@@ -63,8 +129,8 @@ class Bicycle {
   public $description;
   public $gender;
   public $price;
-  protected $weight_kg;
-  protected $condition_id;
+  public $weight_kg;
+  public $condition_id;
 
   public const CATEGORIES = ['Road', 'Mountain', 'Hybrid', 'Cruiser', 'City', 'BMX'];
 
