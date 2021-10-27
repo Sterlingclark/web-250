@@ -147,8 +147,6 @@ class DatabaseObject {
     //   echo $user->first_name . " was deleted.";
     // but, for example, we can't call $user->update() after
     // calling $user->delete().
-
-    // 24d8e58218694c11371ccfdbc27102cf8f6e5aad
   }
 
 }
