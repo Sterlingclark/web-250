@@ -1,5 +1,4 @@
 <?php
-
 class Admin extends DatabaseObject {
 
   static protected $table_name = "admins";
