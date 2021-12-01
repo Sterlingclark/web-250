@@ -1,5 +1,4 @@
 <?php
-// Local server info:
 
 define("DB_SERVER", "localhost");
 define("DB_USER", "webuser");

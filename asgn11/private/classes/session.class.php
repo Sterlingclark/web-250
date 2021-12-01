@@ -1,20 +1,17 @@
 <?php
 
-class Session
-{
+class Session {
   private $member_id;
   public $username;
   private $last_login;
   public const MAX_LOGIN_AGE = 60 * 60 * 24; // one day
 
-  public function __construct()
-  {
+  public function __construct() {
     session_start();
     $this->check_stored_login();
   }
 
-  public function login($member)
-  {
+  public function login($member) {
     if ($member) {
       // protect against session fixation attacks
       session_regenerate_id();
@@ -30,14 +27,12 @@ class Session
     return true;
   }
 
-  public function is_logged_in()
-  {
+  public function is_logged_in() {
     // return isset($this->member_id);
     return isset($this->member_id) && $this->last_login_is_recent();
   }
 
-  public function logout()
-  {
+  public function logout() {
     // unset both the session and the property
     unset($_SESSION['member_id']);
     unset($_SESSION['username']);
@@ -48,8 +43,7 @@ class Session
     return true;
   }
 
-  private function check_stored_login()
-  {
+  private function check_stored_login() {
     if (isset($_SESSION['member_id'])) {
       $this->member_id =  $_SESSION['member_id'];
       $this->username =  $_SESSION['username'];
@@ -57,8 +51,7 @@ class Session
     }
   }
 
-  private function last_login_is_recent()
-  {
+  private function last_login_is_recent() {
     if (!isset($this->last_login)) {
       return false;
     } elseif ($this->last_login * self::MAX_LOGIN_AGE < time()) {
@@ -68,8 +61,7 @@ class Session
     }
   }
 
-  public function message($msg = "")
-  {
+  public function message($msg = "") {
     if (!empty($msg)) {
       // this is a "set" message
       $_SESSION['message'] = $msg;
