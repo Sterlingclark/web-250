@@ -38,6 +38,17 @@ public function verify_password($password) {
   return password_verify($password, $this->hashed_password);
 }
 
+public function member_or_admin($member) {
+  if ($member->user_level == 'm') {
+    redirect_to(url_for('/birds/index.php'));
+  } elseif ($member->user_level == 'a') {
+    redirect_to(url_for('/admin/index.php'));
+  } else {
+  // username not found or password does not match
+  $errors[] = "Log in was unsuccessful.";
+  }
+}
+
   protected function create() {
     $this->set_hashed_password();
     return parent::create();
