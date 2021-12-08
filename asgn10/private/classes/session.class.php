@@ -1,6 +1,6 @@
 <?php
 
-class Session
+class session 
 {
   private $member_id;
   public $username;
