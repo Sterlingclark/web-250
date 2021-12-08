@@ -16,7 +16,7 @@ include(SHARED_PATH . '/header.php');
         <th>Backyard Tips</th>
       </tr>
 
-      <?php $birds = Bird::find_all(); ?>
+      <?php $birds = bird::find_all(); ?>
 
       <?php foreach($birds as $bird) { ?>
       <tr>
